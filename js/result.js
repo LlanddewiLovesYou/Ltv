@@ -1,48 +1,74 @@
-$(document).ready(function () {
-    /**
-     * Gets an object and sets its content into the result card in the result page
-     * If there's no content in the JSON object, makes sure to tell the user
-     */
-    if (window.localStorage) { // get rid of this
-      if (localStorage.userObject) {
-        //retriveUserObject()
-        var user_object = localStorage.getItem('userObject');// this can be a check in and of itself istead of nested ifs, get rid of nested ifs for sure
-        retreivedObject = JSON.parse(user_object); //parses the retrieved object into an JSON object
-        if (JSON.stringify(retreivedObject) == "[]") {
-          //displayNoResults()
-          $('#result-count').text("0 Results"); // determineResultCount()
-          $(".result-desc").text( // should be #result-desc
-            "Try starting a new search below" // CONSTANT
-          );
-        } else {
-          //displayResults()
-          $('#result-count').text("1 Result");
-          $("#result-subtext").html("Look at the result below to see the details of the person you’re searched for."); // CONSTANT
-          $(".name").append(
-            retreivedObject.first_name + " " + retreivedObject.last_name
-          );
-          $('.user-description').append(retreivedObject.description);
-          $("#address").append("<p>" + retreivedObject.address + '</p>'); // should be .address
-          $(".email").append("<p>" + retreivedObject.email + "</p>");
+const NO_RESULTS_MESSAGE = "Try starting a new search below"
+const RESULTS_FOUND_MESSAGE = "Look at the result below to see the details of the person you’re searched for."
 
-          for (const phone_number in retreivedObject.phone_numbers) {
-            phone = retreivedObject.phone_numbers[phone_number]
-            formatted_phone = "(" + phone.substring(0, 3) + ") " + phone.substring(3, 6) + "-" + phone.substring(6, 10);// formatPhoneNumber()
-            // addPhoneNumberToDom()
-            $(".phone-num").append(
-              "<a href=" + `tel:${phone}` + " style='display: block;color: #004A80;'>" + `${formatted_phone}` + "</a>"
-            );
-          }
+function retriveUserObjectFromLocalStorage() {
+  var user_object = localStorage.getItem('userObject');
+  return JSON.parse(user_object);
+}
 
-          for (const relative in retreivedObject.relatives) {
-            //addRelativeToDom()
-            $(".relatives").append(
-              "<p style='margin-bottom: 0'>" + `${retreivedObject.relatives[relative]}` + "</p>"
-            );
-          }
+function userObjectNotFound(user) {
+  return JSON.stringify(user) === '[]'
+}
 
-          $(".result-wrap").show();
-        }
-      }
+function displayNoResults() {
+  $('#result-count').text("0 Results");
+  $("#result-subtext").text(
+    `${NO_RESULTS_MESSAGE}`
+  );
+}
+
+function formatPhoneNumber(phoneNumber) {
+  return `(${phoneNumber.substring(0, 3)})${phoneNumber.substring(3, 6)}-${phoneNumber.substring(6, 10)}`;
+}
+
+function addPhoneNumbersToDom(user) {
+  for (const phone_number in user.phone_numbers) {
+    const phoneNumber = user.phone_numbers[phone_number]
+    const formattedPhoneNumber = formatPhoneNumber(phoneNumber)
+    $(".phone-num").append(
+      `<a href="tel:${phoneNumber}">${formattedPhoneNumber}</a>`
+    );
+  }
+}
+
+function addRelativesToDom(user) {
+  for (const relative in user.relatives) {
+    $(".relatives").append(
+      `<p>${user.relatives[relative]}</p>`
+    );
+  }
+}
+
+function displayResults(user) {
+  // NOTE: I have changed all querys to use ids when there is only one instance of them
+  // I am querying by class when there COULD be more than one element on the page
+  // even though only one result ever gets returned at present.
+  $('#result-count').text("1 Result");// TODO: write determineResultsCount function to allow for more than one result to be returned.
+  $("#result-subtext").html(`${RESULTS_FOUND_MESSAGE}`);
+  $(".name").text(
+    `${user.first_name} ${user.last_name}`
+  );
+  $('.user-description').text(user.description);
+  $(".address").text(user.address);
+  $(".email").text(user.email);
+
+  addPhoneNumbersToDom(user)
+  addRelativesToDom(user)
+
+  $("#result-wrap").show();
+}
+
+function retrieveAndDisplayUserInfo() {
+  const user = retriveUserObjectFromLocalStorage()
+  if (user) {
+    if (userObjectNotFound(user)) {
+      displayNoResults()
+    } else {
+      displayResults(user)
     }
-  });
+  }
+}
+
+$(document).ready(function () {
+  retrieveAndDisplayUserInfo()
+});

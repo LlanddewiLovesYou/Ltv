@@ -314,6 +314,15 @@ section {
   color: #4a4a4a;
 }
 
+.phone-num > a {
+  display: block;
+  color: #004a80;
+}
+
+.relatives > p {
+  margin-bottom: 0;
+}
+
 @media (max-width: 991px) {
   .result {
     min-height: 512px;
