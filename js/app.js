@@ -26,10 +26,22 @@ function removeErrorClass() {
   document.querySelector('.input-group').classList.remove("error");
 }
 
+function renderLoadingSpinner() {
+  const aboveTheFold = $('#above-the-fold')
+  const features = $('#features')
+  const loadingSpinner = $('#loading-spinner')
+
+  aboveTheFold.remove()
+  features.remove()
+  loadingSpinner.show()
+
+}
+
 // I'm sure there's a better name for this if I had more context
 function callLtvApi(proxyUrl) {
   const proxy = proxyUrl || ''
   const url = LTV_API_BASE_URL + getEmailFromInput()
+  renderLoadingSpinner()
   fetch(proxy + url)
     .then((response) => response.text())
     .then(function (contents) {
