@@ -8,8 +8,8 @@
 --| [SECTION] Features
 --| [SECTION][RESULTS PAGE] Result
 --| [SECTION][RESULTS PAGE] Search Again
---| Footer
 --| [SECTION] Loading Spinner
+--| Footer
 --------------------------------------------------------
 ----------------------------------------------------- */
 
@@ -23,6 +23,10 @@ body {
   font-family: "Lato", sans-serif;
   color: #000;
   font-size: 18px;
+}
+
+button:focus {
+  outline: 2px dotted gray;
 }
 
 h1 {
@@ -49,6 +53,12 @@ h4,
 h5 {
   font-weight: bold;
   color: #004a80;
+}
+
+label {
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 0;
 }
 
 section {
@@ -102,6 +112,45 @@ section {
 --- Search Form ---
 ***************************************************************
 ************************************************************ */
+
+.search-controls {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.search-controls label {
+  margin-right: 14px;
+}
+
+.search-controls .selector-button {
+  height: 35px;
+  width: 150px;
+  color: #f6bc25;
+  background-color: #004a80;
+  border: 3px solid #f6bc25;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 0 10px;
+}
+
+.search-controls .selector-button.selected {
+  color: #004a80;
+  background-color: #f6bc25;
+}
+
+.selector-button.selected:after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #f6bc25 transparent transparent transparent;
+}
 
 .btn-form-submit {
   font-size: 24px;
@@ -182,7 +231,23 @@ section {
   }
   .input-group.error .error-msg {
     position: static;
-    width: fit-content;
+  }
+}
+
+@media (max-width: 321px) {
+  .search-controls label {
+    display: none;
+  }
+
+  .search-controls {
+    justify-content: space-between;
+  }
+
+  .search-controls .selector-button {
+    margin: 0;
+    font-size: 14px;
+    width: 140px;
+    line-height: auto;
   }
 }
 
@@ -394,6 +459,42 @@ section {
 
 /* ************************************************************
 ***************************************************************
+--- [SECTION] Loading Spinner ---
+***************************************************************
+************************************************************ */
+/* You can use these classes to aid development of the
+loading spinner. Simply uncomment them and you can
+isolate the spinner on the page. */
+/* .above-the-fold {
+  display: none;
+}
+.features {
+  display: none;
+} */
+
+.loading-spinner {
+  padding: 0;
+  /* you'll want to comment out this display to
+  if youre trying to dev the loading spinner; */
+  display: none;
+}
+
+.loading-spinner img {
+  height: 154px;
+  width: 154px;
+  margin-bottom: 27px;
+}
+
+.loading-flex {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ************************************************************
+***************************************************************
 --- Footer ---
 ***************************************************************
 ************************************************************ */
@@ -418,38 +519,3 @@ section {
   content: "|";
   padding-left: 5px;
 }
-
-/* ************************************************************
-***************************************************************
---- [SECTION] Loading Spinner ---
-***************************************************************
-************************************************************ */
-
-.loading-spinner {
-  padding: 0;
-  display: none;
-}
-
-.loading-spinner img {
-  height: 154px;
-  width: 154px;
-  margin-bottom: 27px;
-}
-
-.loading-flex {
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* You can use these classes to aid development of the
-loading spinner. Simply uncomment them and you can
-isolate the spinner on the page. */
-/* .above-the-fold {
-  display: none;
-}
-.features {
-  display: none;
-} */

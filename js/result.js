@@ -40,10 +40,7 @@ function addRelativesToDom(user) {
 }
 
 function displayResults(user) {
-  // NOTE: I have changed all querys to use ids when there is only one instance of them
-  // I am querying by class when there COULD be more than one element on the page
-  // even though only one result ever gets returned at present.
-  $('#result-count').text("1 Result");// TODO: write determineResultsCount function to allow for more than one result to be returned.
+  $('#result-count').text("1 Result");
   $("#result-subtext").html(`${RESULTS_FOUND_MESSAGE}`);
   $(".name").text(
     `${user.first_name} ${user.last_name}`
@@ -59,12 +56,12 @@ function displayResults(user) {
 }
 
 function retrieveAndDisplayUserInfo() {
-  const user = retriveUserObjectFromLocalStorage()
-  if (user) {
-    if (userObjectNotFound(user)) {
+  const users = retriveUserObjectFromLocalStorage()
+  if (users) {
+    if (userObjectNotFound(users)) {
       displayNoResults()
     } else {
-      displayResults(user)
+      displayResults(users)
     }
   }
 }

@@ -17,7 +17,7 @@
         </a>
         <div>
           <img src="img/icn_search.svg" width="23" height="23" alt="Search">
-          <img class="ml-4" src="img/icn_person.svg" alt="Profile">
+          <img class="ml-4" src="img/icn_person.svg"  width="20" height="23" alt="Profile">
         </div>
       </div>
     </nav>
@@ -67,10 +67,15 @@
           <h1 class="mb-3">Can't Find The Right Person?</h1>
           <h2 class="mb-4 mb-md-5"><strong>Try Again</strong> - Make a new search</h2>
         </div>
+        <div class="search-controls">
+          <label for="selector-button">TYPE OF SEARCH:</label>
+          <button id="email-button" class="selector-button selected">Email Address</button>
+          <button id="phone-button" class="selector-button">Phone Number</button>
+        </div>
         <form>
           <div class="input-group">
-            <input class="form-control" type="text" name="email" placeholder="Enter an Email Address" />
-            <p class="error-msg">Please enter a valid email address</p>
+            <input id="search-input" class="form-control" type="text" name="email" placeholder="Enter an Email Address" />
+            <p id="input-error" class="error-msg">Please enter a valid email address</p>
             <button id="btn-search" class="btn btn-form-submit text-uppercase" type="submit">Go!</button>
           </div>
         </form>
@@ -93,6 +98,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/SearchState.js"></script>
     <script src="js/app.js"></script>
     <script src="js/result.js"></script>
   </body>
