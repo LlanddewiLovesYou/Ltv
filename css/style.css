@@ -107,6 +107,12 @@ section {
   padding: 20px 16px;
 }
 
+@media (max-width: 767px) {
+  .navbar {
+    padding: 20px 0;
+  }
+}
+
 /* ************************************************************
 ***************************************************************
 --- Search Form ---
@@ -245,7 +251,7 @@ section {
 
   .search-controls .selector-button {
     margin: 0;
-    font-size: 14px;
+    font-size: 17px;
     width: 140px;
     line-height: auto;
   }
@@ -408,12 +414,14 @@ section {
 }
 
 .relatives > p {
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 
 @media (max-width: 991px) {
   .result {
     min-height: 512px;
+    padding-top: 27px;
+    padding-bottom: 0;
   }
   .result-avatar {
     width: 63px;
@@ -424,14 +432,31 @@ section {
   .result-avatar img {
     width: 28px;
   }
+  .result-content p {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 767px) {
   .result {
     min-height: 306px;
   }
+
   .result-avatar {
     display: none;
+  }
+}
+
+@media (max-width: 321px) {
+  .headline > h1.results-desc {
+    font-size: 38px;
+  }
+  .headline > h2.results-desc {
+    font-size: 18px;
+  }
+
+  .result-card {
+    padding: 24px 15px;
   }
 }
 
@@ -491,6 +516,18 @@ isolate the spinner on the page. */
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 321px) {
+  .loading-spinner img {
+    height: 124px;
+    width: 124px;
+    margin-bottom: 16px;
+  }
+
+  .loading-spinner h3 {
+    font-size: 18px;
+  }
 }
 
 /* ************************************************************
