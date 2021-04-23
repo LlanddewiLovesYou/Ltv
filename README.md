@@ -13,3 +13,15 @@ Thanks for taking the time to review my submission for the Ltv coding challenge!
 4. QA issues - I solved the issue of the features being out of order primarily with simple `flex-box`. This seemed like the simplest and most elegant solution. I am still taking advantage of the Bootstrap classes provided.
 
 5. Feature Implementation - So I did a quick and dirty `js class` called `SearchState` which basically keeps a reference to which button (email or phone number) was last pushed which can be read to determine which class each button should have and also which query should be made. This class should be extendable should the need to do so arise in future development.
+
+6. Other bugs:
+
+- Relatives in result view should have a `margin-bottom` of `5px`
+
+- Tablet and Mobile view were inheriting their `padding-top` and `padding-bottom` from `section` styles which was throwing off the layout slightly.
+
+- The navbar's left and right margin were too large in tablet and mobile view.
+
+- The new search naviagtion buttons that I added should have a `font-size` of `14px` in mobile view according to the mockup. This didn't look right at all and upon closer inspection of the actual text in the mock up they're actually closer to `16px`, so I adjusted them to `16px`. We should follow up on this one though.
+
+- Various responsive font sizing issues on tablet and mobile results page.
